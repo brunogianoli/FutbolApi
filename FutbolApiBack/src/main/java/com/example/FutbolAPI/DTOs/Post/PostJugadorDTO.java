@@ -9,6 +9,7 @@ import java.util.List;
 @NoArgsConstructor
 public class PostJugadorDTO {
 
+    Long id;
     String nombre;
     String posicion;
     String debut;
@@ -24,7 +25,6 @@ public class PostJugadorDTO {
         Integer cantGoles;
         Integer partidosJugados;
         String piernaHabil;
-
     }
 
 

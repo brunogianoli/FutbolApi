@@ -32,8 +32,12 @@ public class EstadisticaServiceImpl implements EstadisticaService {
         EstadisticasEntity estadisticas = jugadorEntity.getEstadisticas();//Consigo las estadisticas
 
         //Las mapeo a tipo DTO
+        GetEstadisticasJugadorDTO dto = new GetEstadisticasJugadorDTO();
+        dto.setCantGoles(estadisticas.getCantidadGoles());
+        dto.setPiernaHabil(estadisticas.getPiernaHabil());
+        dto.setPartidosJugados(estadisticas.getPartidosJugados());
 
-        return modelMapper.map(estadisticas, GetEstadisticasJugadorDTO.class);
+        return dto;
     }
 
     @Override
