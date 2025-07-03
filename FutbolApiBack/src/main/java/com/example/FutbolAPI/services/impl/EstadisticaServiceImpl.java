@@ -33,7 +33,7 @@ public class EstadisticaServiceImpl implements EstadisticaService {
 
         //Las mapeo a tipo DTO
         GetEstadisticasJugadorDTO dto = new GetEstadisticasJugadorDTO();
-        dto.setCantGoles(estadisticas.getCantidadGoles());
+        dto.setCantidadGoles(estadisticas.getCantidadGoles());
         dto.setPiernaHabil(estadisticas.getPiernaHabil());
         dto.setPartidosJugados(estadisticas.getPartidosJugados());
 
@@ -41,16 +41,18 @@ public class EstadisticaServiceImpl implements EstadisticaService {
     }
 
     @Override
-    public PutEstadisticasDTO putEstadisticas(Long jugadorId, PutEstadisticasDTO dto) {
+    public String putEstadisticas(Long jugadorId, PutEstadisticasDTO dto) {
         JugadorEntity jugador = jugadorRepository.findById(jugadorId)
                 .orElseThrow(() -> new RuntimeException("Jugador no encontrado"));
 
         EstadisticasEntity estadisticas = jugador.getEstadisticas();
-
+        if(dto.getCantidadGoles() < 0 || dto.getPartidosJugados() < 0) {
+            return "Cantidad de goles y partidos jugados deben ser mayores o iguales a 0";
+        }
         modelMapper.map(dto, estadisticas);
 
         estadisticaRepository.save(estadisticas);
 
-        return modelMapper.map(estadisticas, PutEstadisticasDTO.class);
+        return "Se actualizaron las estadisticas del jugador con id: " + jugadorId;
     }
 }

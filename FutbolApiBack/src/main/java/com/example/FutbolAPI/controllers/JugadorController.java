@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/jugadores")
-@CrossOrigin(origins = "http://localhost:4200") // habilita CORS solo para Angular
+@CrossOrigin(origins = "http://localhost:4200")
 public class JugadorController {
 
     @Autowired
@@ -58,10 +58,4 @@ public class JugadorController {
     public void deleteJugador(@PathVariable Long id){
         jugadorService.deleteJugador(id);
     }
-
-
-
-
-
-
 }

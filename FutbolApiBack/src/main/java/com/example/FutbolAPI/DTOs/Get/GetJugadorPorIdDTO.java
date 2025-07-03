@@ -29,7 +29,7 @@ public class    GetJugadorPorIdDTO {
     @NoArgsConstructor
     public static class EstadisticasDTO {
         Long id;
-        Integer cantGoles;
+        Integer cantidadGoles;
         Integer partidosJugados;
         String piernaHabil;
     }

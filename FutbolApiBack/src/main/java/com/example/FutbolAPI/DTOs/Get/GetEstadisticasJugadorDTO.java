@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class GetEstadisticasJugadorDTO {
-    Integer cantGoles;
+    Integer cantidadGoles;
     Integer partidosJugados;
     String piernaHabil;
 }

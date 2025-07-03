@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200") // habilita CORS solo para Angular
 @RequestMapping("api/clubes")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ClubController {
 
     @Autowired
