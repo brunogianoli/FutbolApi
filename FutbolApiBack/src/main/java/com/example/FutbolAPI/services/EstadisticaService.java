@@ -9,5 +9,5 @@ import java.util.List;
 @Service
 public interface EstadisticaService {
     GetEstadisticasJugadorDTO getEstadisticas(Long id);
-    PutEstadisticasDTO putEstadisticas(Long id,PutEstadisticasDTO putEstadisticasDTO);
+    String putEstadisticas(Long id,PutEstadisticasDTO putEstadisticasDTO);
 }

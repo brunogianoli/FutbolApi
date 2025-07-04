@@ -30,10 +30,9 @@ public class EstadisticasController {
     }
 
     @PutMapping("")
-    public ResponseEntity<PutEstadisticasDTO >putEstadisticasJugador(@PathVariable PutEstadisticasDTO putEstadisticasDTO, @PathVariable Long id){
-
+    public ResponseEntity<String>putEstadisticasJugador(
+            @RequestBody PutEstadisticasDTO putEstadisticasDTO,
+            @PathVariable Long id){
         return ResponseEntity.ok(estadisticaService.putEstadisticas(id,putEstadisticasDTO));
-
-
     }
 }
