@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -25,9 +26,30 @@ public class JugadorController {
 
 
     @GetMapping("")
-    ResponseEntity<List<GetJugadoresDTO>> getAll(){
+    ResponseEntity<List<GetJugadoresDTO>> getAll( ){
         return ResponseEntity.ok(jugadorService.getAllJugadores());
     }
+
+    @GetMapping("/search")
+    ResponseEntity<List<GetJugadoresDTO>> getAllFiltrados(
+            @RequestParam (required = false) String club,
+            @RequestParam (required = false) String posicion,
+            @RequestParam (required = false) String desde,
+            @RequestParam (required = false) String hasta
+    ){
+        List<GetJugadoresDTO> jugadoresDTOList = jugadorService.getAllJugadoresFiltrados(club, posicion, desde, hasta);
+        return ResponseEntity.ok(jugadoresDTOList);
+    }
+
+//    @GetMapping("/search")
+//    public ResponseEntity<List<DummyResponseDto>> searchDummies(
+//            @RequestParam(required = false) String dummyField,
+//            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fromDate
+//    ) {
+//        List<DummyResponseDto> result = dummyService.search(dummyField, fromDate);
+//        return ResponseEntity.ok(result);
+//    }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<GetJugadorPorIdDTO> getJugadorPorId(@PathVariable Long id) {

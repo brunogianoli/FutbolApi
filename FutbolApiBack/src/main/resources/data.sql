@@ -16,9 +16,4 @@ INSERT INTO jugador_entity (id, nombre, posicion, debut, retiro, estadisticas_id
 (2, 'Cristiano Ronaldo', 'Delantero', '2002-08-14', null, 2),
 (3, 'Andrea Pirlo', 'Mediocampista', '1995-09-01', '2017-11-05', 3);
 
--- Relación many-to-many jugador - club
-INSERT INTO jugador_club (jugador_id, club_id) VALUES
-(1, 1), -- Messi → Barcelona
-(2, 2), -- CR7 → Real Madrid
-(2, 3), -- CR7 → Juventus
-(3, 3); -- Pirlo → Juventus
+

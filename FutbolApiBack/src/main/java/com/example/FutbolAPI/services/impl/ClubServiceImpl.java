@@ -35,7 +35,7 @@ public class ClubServiceImpl implements ClubService {
         List<JugadorEntity> jugadorEntityList = jugadorRepository.findAll();
 
         return jugadorEntityList.stream()
-                .filter(jugador -> jugador.getClubes() != null && jugador.getClubes().contains(clubEntity))
+
                 .map(jugador -> modelMapper.map(jugador, GetJugadoresPorClubDTO.class))
                 .toList();
     }

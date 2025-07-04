@@ -8,38 +8,48 @@ import com.example.FutbolAPI.DTOs.Post.PostJugadorDTO;
 import com.example.FutbolAPI.entities.JugadorEntity;
 import com.example.FutbolAPI.repositories.JugadorRepository;
 import com.example.FutbolAPI.services.JugadorService;
-import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-
+import java.util.Objects;
 
 @Service
 public class JugadorServiceImpl implements JugadorService {
-
 
     @Autowired
     private JugadorRepository jugadorRepository;
     @Autowired
     private ModelMapper modelMapper;
 
+
     @Override
     public List<GetJugadoresDTO> getAllJugadores() {
-        List<JugadorEntity>jugadorEntityList = jugadorRepository.findAll();
+        List<JugadorEntity> jugadorEntityList = jugadorRepository.findAll();
         return jugadorEntityList.stream()
                 .map(entity -> modelMapper.map(entity, GetJugadoresDTO.class))
                 .toList();
     }
 
     @Override
+    public List<GetJugadoresDTO> getAllJugadoresFiltrados(String club, String posicion, String desde, String hasta) {
+        List<JugadorEntity> jugadorEntityList = jugadorRepository.findAll();
+        return jugadorEntityList.stream()
+                .filter( jugador -> !Objects.equals(jugador.getClub().toString(), club))
+                .filter(jugador -> !Objects.equals(jugador.getPosicion(), posicion))
+                .filter(jugador -> !Objects.equals(jugador.getDebut(), desde))
+                .filter(jugador -> !Objects.equals(jugador.getRetiro(), hasta))
+                .map(entity -> modelMapper.map(entity, GetJugadoresDTO.class))
+                .toList();
+    }
+
+
+    @Override
     public GetJugadorPorIdDTO getJugadorByid(Long id) {
         JugadorEntity jugadorEntity = jugadorRepository.getReferenceById(id);
         return modelMapper.map(jugadorEntity, GetJugadorPorIdDTO.class);
     }
-
 
 
     @Override
@@ -59,8 +69,8 @@ public class JugadorServiceImpl implements JugadorService {
 
         return jugadorEntityList.stream()
                 .filter(jugador ->
-                        jugador.getDebut().compareTo(desde) >= 0 &&
-                                jugador.getDebut().compareTo(hasta) <= 0
+                        jugador.getDebut().compareTo(desde) >= 0
+                        && jugador.getDebut().compareTo(hasta) <= 0
                 )
                 .map(jugador -> modelMapper.map(jugador, GetJugadorPorRangoDTO.class))
                 .toList();
@@ -78,3 +88,5 @@ public class JugadorServiceImpl implements JugadorService {
 
     }
 }
+
+
