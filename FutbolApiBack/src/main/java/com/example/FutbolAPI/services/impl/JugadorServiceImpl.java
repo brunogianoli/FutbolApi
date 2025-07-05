@@ -13,8 +13,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-
+import java.util.Objects;
 
 
 @Service
@@ -76,5 +78,23 @@ public class JugadorServiceImpl implements JugadorService {
     public void deleteJugador(Long id) {
         jugadorRepository.deleteById(id);
 
+    }
+
+    @Override
+    public List<GetJugadoresDTO> search(String club, String posicion, LocalDate desde, LocalDate hasta) {
+        List<JugadorEntity> jugadorEntityList = jugadorRepository.findAll().stream()
+                .filter(jugador ->
+                        club == null || jugador.getClubes().stream()
+                        .anyMatch(clubEntity -> clubEntity.getNombre().equalsIgnoreCase(club)))
+                .filter(jugador ->
+                        posicion == null || Objects.equals(jugador.getPosicion(), posicion))
+                .filter(jugador ->
+                        desde == null || LocalDate.parse(jugador.getDebut(), DateTimeFormatter.ofPattern("yyyy-MM-dd")).isAfter(desde))
+                .filter(jugador ->
+                        hasta == null || LocalDate.parse(jugador.getDebut(), DateTimeFormatter.ofPattern("yyyy-MM-dd")).isBefore(hasta))
+                .toList();
+        return jugadorEntityList.stream()
+                .map(entity -> modelMapper.map(entity, GetJugadoresDTO.class))
+                .toList();
     }
 }

@@ -9,6 +9,7 @@ import com.example.FutbolAPI.entities.JugadorEntity;
 
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -21,7 +22,5 @@ public interface JugadorService {
     void deleteJugador(Long id);
 
 
-
-
-
+    List<GetJugadoresDTO> search(String club, String posicion, LocalDate desde, LocalDate hasta);
 }

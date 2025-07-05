@@ -53,6 +53,6 @@ public class EstadisticaServiceImpl implements EstadisticaService {
 
         estadisticaRepository.save(estadisticas);
 
-        return "Se actualizaron las estadisticas del jugador con id: " + jugadorId;
+        return "Se actualizaron las estadisticas de " + jugador.getNombre();
     }
 }

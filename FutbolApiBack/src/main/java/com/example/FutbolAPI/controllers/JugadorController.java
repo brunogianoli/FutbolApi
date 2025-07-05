@@ -58,4 +58,14 @@ public class JugadorController {
     public void deleteJugador(@PathVariable Long id){
         jugadorService.deleteJugador(id);
     }
+    @GetMapping("/search")
+    public ResponseEntity<List<GetJugadoresDTO>> searchJugadores(
+            @RequestParam(required = false) String club,
+            @RequestParam(required = false) String posicion,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate desde,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate hasta
+    ) {
+        List<GetJugadoresDTO> result = jugadorService.search(club, posicion, desde, hasta);
+        return ResponseEntity.ok(result);
+    }
 }
