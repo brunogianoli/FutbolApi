@@ -22,6 +22,5 @@ public interface JugadorService {
     PostJugadorDTO postJugador(PostJugadorDTO jugadorDTO);
     void deleteJugador(Long id);
 
-
     List<GetJugadoresDTO> search(String club, String posicion, LocalDate desde, LocalDate hasta);
 }
