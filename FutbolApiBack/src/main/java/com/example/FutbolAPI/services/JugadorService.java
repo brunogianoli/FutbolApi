@@ -15,6 +15,7 @@ import java.util.List;
 @Service
 public interface JugadorService {
     List<GetJugadoresDTO> getAllJugadores();
+    List<GetJugadoresDTO> getAllJugadoresFiltrados(String club, String posicion, String desde, String hasta);
     GetJugadorPorIdDTO getJugadorByid(Long id);
     List<GetJugadoresActivosDTO> getJugadoresActivos();
     List<GetJugadorPorRangoDTO> getJugadoresPorRango (String desde, String hasta);
